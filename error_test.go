@@ -20,6 +20,30 @@ func ExampleError_IsA() {
 
 }
 
+func ExampleError_Cause() {
+	ErrFoo := NewError()
+	ErrBar := NewError()
+	ErrBaz := errors.New("baz")
+
+	err := ErrBar.Embed(ErrBaz, "bar")
+	err = ErrFoo.Embed(err, "foo")
+	fmt.Println(err.Cause() == ErrBaz)
+
+	// Output: true
+}
+
+func ExampleError_Error() {
+	ErrFoo := NewError()
+	ErrBar := NewError()
+	ErrBaz := errors.New("baz")
+
+	err := ErrBar.Embed(ErrBaz, "bar")
+	err = ErrFoo.Embed(err, "foo")
+	fmt.Println(err.Error())
+
+	// Output foo: bar: baz
+}
+
 func TestIsANew(t *testing.T) {
 	ErrBar := NewError()
 	err := error(ErrBar.New("foo"))
