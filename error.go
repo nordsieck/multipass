@@ -37,13 +37,6 @@ func (e Error) IsA(err error) bool {
 	return ok && otherError.id == e.id
 }
 
-func ExampleError_IsA() {
-	ErrFoo := NewError()
-	err := ErrFoo.New("foo")
-	fmt.Println(ErrFoo.IsA(err))
-	// Output: true
-}
-
 // New returns a new error of the same kind with the provided error message.
 func (e Error) New(f string, a ...interface{}) Error {
 	return Error{id: e.id, Text: fmt.Sprintf(f, a...)}

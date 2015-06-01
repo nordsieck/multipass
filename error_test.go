@@ -2,8 +2,23 @@ package multipass
 
 import (
 	"errors"
+	"fmt"
 	"testing"
 )
+
+func ExampleError_IsA() {
+	ErrFoo := NewError()
+
+	err := error(ErrFoo.New("foo"))
+	fmt.Println(ErrFoo.IsA(err))
+
+	err = errors.New("bar")
+	fmt.Println(ErrFoo.IsA(err))
+
+	// Output: true
+	// false
+
+}
 
 func TestIsANew(t *testing.T) {
 	ErrBar := NewError()
