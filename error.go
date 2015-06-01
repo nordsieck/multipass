@@ -6,7 +6,7 @@ import (
 )
 
 var (
-	nextErr = func(u uint64) *uint64 { return &u }(0)
+	nextErr = new(uint64)
 
 	// enforce interfaces
 	_ = error(Error{})
