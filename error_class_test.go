@@ -2,8 +2,27 @@ package multipass
 
 import (
 	"errors"
+	"fmt"
 	"testing"
 )
+
+func ExampleErrorClass_Contains() {
+	ErrFoo := NewError()
+	ErrBar := errors.New("bar")
+	ErrBaz := NewError()
+	ErrQux := errors.New("qux")
+
+	ec := NewErrorClass(ErrFoo, ErrBar)
+	fmt.Println(ec.Contains(ErrFoo))
+	fmt.Println(ec.Contains(ErrBar))
+	fmt.Println(ec.Contains(ErrBaz))
+	fmt.Println(ec.Contains(ErrQux))
+
+	// Output: true
+	// true
+	// false
+	// false
+}
 
 func TestContains(t *testing.T) {
 	ErrFoo := NewError()
